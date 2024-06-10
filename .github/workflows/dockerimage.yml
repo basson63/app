@@ -12,8 +12,7 @@ jobs:
       with:
         yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
 
-    - name: Build, tag, and push image to Yandex Cloud Container Registry
-      uses: actions/build-push-action@v2
+    - name: Build, tag, and push image to Yandex Cloud Container Registr
       env:
           CR_REGISTRY: crpmh7guhbh8fj5qs00k
           CR_REPO: yc-cr-github-action
