@@ -15,7 +15,7 @@ jobs:
     - name: Build, tag, and push image to Yandex Cloud Container Registr
       env:
           CR_REGISTRY: crpmh7guhbh8fj5qs00k
-          CR_REPO: yc-cr-github-action
+          CR_REPO: komlev_webapp
           IMAGE_TAG: latest
       run: |
         docker build -t cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG .
