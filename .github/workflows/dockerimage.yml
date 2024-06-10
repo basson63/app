@@ -16,7 +16,7 @@ jobs:
       env:
           CR_REGISTRY: crpmh7guhbh8fj5qs00k
           CR_REPO: yc-cr-github-action
-          IMAGE_TAG: ${{ github.sha }}
+          IMAGE_TAG: latest
       run: |
         docker build -t cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG .
         docker push cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
