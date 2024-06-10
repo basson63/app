@@ -1,0 +1,23 @@
+name: Docker Image CI
+on:
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Yandex Cloud CR "Login" Action for GitHub Actions
+      uses: yc-actions/yc-cr-login@v0.1-alpha
+      with:
+        yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+    - name: Build, tag, and push image to Yandex Cloud Container Registry
+      uses: actions/build-push-action@v2
+      env:
+        CR_REGISTRY: crpmh7guhbh8fj5qs00k
+        CR_REPO: yc-cr-github-action
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+      docker build -t cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG .
+      docker push cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
