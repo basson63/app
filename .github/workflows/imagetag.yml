@@ -21,7 +21,7 @@ jobs:
       run: |
         docker build -t cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG .
         docker push cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
-        
+
     - name: Setup kubeconfig
       run: echo '${{ secrets.KUBECONFIG_FILE }}' > kubeconfig
 
@@ -39,9 +39,5 @@ jobs:
     - name: Deploy to Kubernetes
       run: |
         export KUBECONFIG=kubeconfig
-<<<<<<< HEAD
         kubectl apply -f deployment.yaml && kubectl apply -f service.yaml && kubectl set image deployment/webapp-diplom webapp-diplom=cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
-=======
-        qbec apply default && kubectl set image deployment/webapp-diplom webapp-diplom=cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
->>>>>>> cac802e (webapp_2)
 
