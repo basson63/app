@@ -34,10 +34,10 @@ jobs:
     - name: Delete old deployment
       run: |
         export KUBECONFIG=kubeconfig
-        kubectl delete deploy webapp-diploma || true
+        kubectl delete deploy webapp-diplom || true
 
     - name: Deploy to Kubernetes
       run: |
         export KUBECONFIG=kubeconfig
-        kubectl apply -f deployment.yaml && kubectl apply -f service.yaml && kubectl set image deployment/webapp-diplom webapp-diplom=cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
+        kubectl apply -f deployment.yaml && kubectl apply -f service.yaml && kubectl set image deployment/webapp-diplom my-first-registry=cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
 
