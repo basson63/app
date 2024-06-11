@@ -39,5 +39,5 @@ jobs:
     - name: Deploy to Kubernetes
       run: |
         export KUBECONFIG=kubeconfig
-        kubectl apply -f deployment.yaml && kubectl apply -f service.yaml && kubectl set image deployment/webapp-diplom my-first-registry=cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
+        kubectl apply -f deployment.yaml && kubectl apply -f service.yaml && kubectl set image deployment/webapp-diplom my-first-registry=cr.yandex/crpmh7guhbh8fj5qs00k/komlev_webapp
 
