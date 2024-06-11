@@ -18,6 +18,7 @@ spec:
       containers:
       - name: my-first-registry
         image: cr.yandex/crpmh7guhbh8fj5qs00k/komlev_webapp
+        imagePullPolicy: "Always"  
         ports:
         - containerPort: 80
       imagePullSecrets: [{ name: 'basson63' }]
