@@ -1,0 +1,47 @@
+name: Deploy
+on:
+  push:
+    tags:
+    - "v*"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Yandex Cloud CR "Login" Action for GitHub Actions
+      uses: yc-actions/yc-cr-login@v0.1-alpha
+      with:
+        yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+    - name: Build and push Docker image to Yandex Cloud Container Registr
+      env:
+          CR_REGISTRY: crpmh7guhbh8fj5qs00k
+          CR_REPO: komlev_webapp
+          IMAGE_TAG: ${{ github.ref_name }}
+      run: |
+        docker build -t cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG .
+        docker push cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
+        
+    - name: Setup kubeconfig
+      run: echo '${{ secrets.KUBECONFIG_FILE }}' > kubeconfig
+
+    - name: Install Kubernetes CLI
+      run: |
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
+        chmod +x kubectl
+        sudo mv kubectl /usr/local/bin/
+
+    - name: Delete old deployment
+      run: |
+        export KUBECONFIG=kubeconfig
+        kubectl delete deploy webapp-diploma || true
+
+    - name: Deploy to Kubernetes
+      run: |
+        export KUBECONFIG=kubeconfig
+<<<<<<< HEAD
+        kubectl apply -f deployment.yaml && kubectl apply -f service.yaml && kubectl set image deployment/webapp-diplom webapp-diplom=cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
+=======
+        qbec apply default && kubectl set image deployment/webapp-diplom webapp-diplom=cr.yandex/$CR_REGISTRY/$CR_REPO:$IMAGE_TAG
+>>>>>>> cac802e (webapp_2)
+
