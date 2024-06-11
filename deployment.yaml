@@ -20,3 +20,5 @@ spec:
         image: cr.yandex/crpmh7guhbh8fj5qs00k/komlev_webapp
         ports:
         - containerPort: 80
+      imagePullSecrets: [{ name: 'basson63' }]
+
