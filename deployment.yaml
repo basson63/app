@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: webapp-diplom-6bfd65db77-484cf
-        image: cr.yandex/crpmh7guhbh8fj5qs00k/komlev_webapp:v1
+        image: cr.yandex/crpmh7guhbh8fj5qs00k/komlev_webapp
         ports:
         - containerPort: 80
